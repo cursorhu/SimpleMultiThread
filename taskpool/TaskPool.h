@@ -1,7 +1,7 @@
 /** 
  * 任务池模型，TaskPool.h
- * zhangyl 2019.02.14
  */
+
 #include <thread>
 #include <mutex>
 #include <condition_variable>
@@ -9,19 +9,20 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <functional> //for visual studio build
 
 class Task
 {
 public:
     virtual void doIt()
     {
-        std::cout << "handle a task..." << std::endl;
+        std::cout << "Do a task..." << std::endl;
     }
 
     virtual ~Task()
     {
         //为了看到一个task的销毁，这里刻意补上其析构函数
-        std::cout << "a task destructed..." << std::endl;
+        std::cout << "A task destructed..." << std::endl;
     }
 };
 
@@ -30,11 +31,11 @@ class TaskPool final
 public:
     TaskPool();
     ~TaskPool();
-    TaskPool(const TaskPool& rhs) = delete;
+    TaskPool(const TaskPool& rhs) = delete;     //delete: 禁用某函数（C++11），阻止拷贝和赋值构造，C++98用private
     TaskPool& operator=(const TaskPool& rhs) = delete;
 
 public:
-    void init(int threadNum = 5);
+    void init(int threadNum = 5);   //默认初始化
     void stop();
 
     void addTask(Task* task);
