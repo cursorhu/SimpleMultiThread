@@ -1,6 +1,5 @@
 /**
  * 任务池模型，TaskPool.cpp
- * zhangyl 2019.02.14
  */
 #include "TaskPool.h"
 
