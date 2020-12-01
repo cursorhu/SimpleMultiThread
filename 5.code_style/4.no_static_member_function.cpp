@@ -1,7 +1,3 @@
-//
-// Created by light on 20-1-31.
-//
-
 
 #include <thread>
 #include <iostream>

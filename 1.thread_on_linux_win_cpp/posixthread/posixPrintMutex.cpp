@@ -2,6 +2,7 @@
 #include <pthread.h>
 #include <iostream>
 #include <unistd.h>
+#include <limits.h> //for INT_MAX
 
 int g_mydata = 1;
 pthread_mutex_t m;
@@ -10,9 +11,10 @@ void* thread_function1(void* args)
 {
 	while (g_mydata < INT_MAX)
 	{
-		pthread_mutex_lock(m);
+		pthread_mutex_lock(&m);
 		++g_mydata;
-		pthread_mutex_unlock(m);
+		pthread_mutex_unlock(&m);
+		sleep(1);
 	}
 	
 	return NULL;
@@ -22,10 +24,9 @@ void* thread_function2(void* args)
 {
 	while (g_mydata < INT_MAX)
 	{	
-		pthread_mutex_lock(m);
+		pthread_mutex_lock(&m);
 		std::cout << "g_mydata = " << g_mydata << ", ThreadID: " << pthread_self() << std::endl;
-		pthread_mutex_unlock(m);
-		
+		pthread_mutex_unlock(&m);
 		sleep(1);
 	}
 	
@@ -34,7 +35,7 @@ void* thread_function2(void* args)
 
 int main()
 {
-	pthread_mutex_init(m, NULL);
+	pthread_mutex_init(&m, NULL);
 	
 	pthread_t threadIDs[2];	
 	pthread_create(&threadIDs[0], NULL, thread_function1, NULL);
@@ -45,7 +46,7 @@ int main()
 		pthread_join(threadIDs[i], NULL);
 	}
 	
-	pthread_mutex_destroy(m);
+	pthread_mutex_destroy(&m);
 
 	return 0;
 }

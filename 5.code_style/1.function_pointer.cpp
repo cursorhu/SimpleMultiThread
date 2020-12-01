@@ -1,6 +1,4 @@
-//
-// Created by light on 20-1-31.
-//
+
 
 // 1.函数指针
 #include <thread>

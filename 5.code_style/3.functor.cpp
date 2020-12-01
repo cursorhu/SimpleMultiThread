@@ -1,17 +1,13 @@
-//
-// Created by light on 20-1-31.
-//
-
 
 #include <thread>
 #include <iostream>
 
 using namespace std;
 
-// 4.Non-static member function
+// 3.functor (Funciton Object)
 class Base {
 public:
-    static void fun(int x) {
+    void operator()(int x) {
         while (x-- > 0) {
             cout << x << endl;
         }
@@ -19,7 +15,7 @@ public:
 };
 
 int main() {
-    thread t(&Base::fun, 10);
+    thread t(Base(), 10);
     t.join();
     return 0;
 }
