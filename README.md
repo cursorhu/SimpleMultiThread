@@ -1,7 +1,7 @@
 # SimpleMultiThread
 
 项目博客：  
-http://47.100.221.149:9010/blog/  
+cursorhu.top/blog/  
 多线程入门（X）  
 
 该项目源码参考了：  
